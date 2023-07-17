@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserSelection {
 
@@ -15,12 +18,39 @@ public class BrowserSelection {
 		 * How To Remove Chrome Warning In Selenium WebDriver- Fix Timed out receiving
 		 * message from renderer. java.net.socketexception connection reset
 		 */
+//		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
 //		System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
 //		ChromeOptions options = new ChromeOptions();
 //		options.addArguments("--remote-allow-origins=*");
 //		WebDriver driver = new ChromeDriver(options);
-		driver = new ChromeDriver();
+//		driver.manage().window().maximize();
+//		return driver;
+		
+//		WebDriverManager.chromedriver().setup();
+//		ChromeOptions options = new ChromeOptions();
+//		options.addArguments("--remote-allow-origins=*");
+//		options.addArguments("--disable-notifications");
+//		DesiredCapabilities dc = new DesiredCapabilities();
+//		dc.setCapability(ChromeOptions.CAPABILITY, options);
+//		options.merge(dc);
+//		WebDriver driver = new ChromeDriver(options);
+//		driver.manage().window().maximize();
+//		return driver;
+		
+//		WebDriverManager.chromedriver().setup();
+//		ChromeOptions options = new ChromeOptions();
+//		options.addArguments("--remote-allow-origins=*");
+//		options.addArguments("--disable-notifications");
+//		WebDriver driver = new ChromeDriver(options);
+//		driver.manage().window().maximize();
+//		return driver;
+		
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--remote-allow-origins=*");
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		return driver;
+		
 	}
 }

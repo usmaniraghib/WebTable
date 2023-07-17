@@ -13,6 +13,7 @@
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		<selenium-java-version>4.9.1</selenium-java-version>
 	    <selenium-chrome-driver-version>4.9.1</selenium-chrome-driver-version>
+	    <webdrivermanager-version>5.3.3</webdrivermanager-version>
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		<testng-version>7.8.0</testng-version>
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -40,6 +41,12 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>${selenium-chrome-driver-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager-version}</version>
 		</dependency>
 
 		<!-- TESTNG [7.8.0] DEPENDENCY-->

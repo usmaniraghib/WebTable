@@ -51,9 +51,9 @@ public class StaticWebTableExampleUsingTestng {
 			columnCount++;
 		}
 		if (columnCount > 0) {
-			System.out.println("No of rows in this table : " + columnCount);
+			System.out.println("No of columns in this table : " + columnCount);
 		} else {
-			System.out.println("No of rows in this table : " + columnCount);
+			System.out.println("No of columns in this table : " + columnCount);
 		}
 
 		// Finding number of Rows

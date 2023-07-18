@@ -54,9 +54,9 @@ public class DynamicWebTableExampleUsingSelenium {
 		// Finding number of Columns
 		int totalColumns = driver.findElements(noOfColumns).size();
 		if (totalColumns > 0) {
-			System.out.println("No of rows in this table : " + totalColumns);
+			System.out.println("No of columns in this table : " + totalColumns);
 		} else {
-			System.out.println("No of rows in this table : " + totalColumns);
+			System.out.println("No of columns in this table : " + totalColumns);
 		}
 
 		// Finding the cell value at specific row and specific column

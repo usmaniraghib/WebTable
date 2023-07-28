@@ -8,8 +8,6 @@ package com.raghib.selenium.staticwebtable;
 */
 
 import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

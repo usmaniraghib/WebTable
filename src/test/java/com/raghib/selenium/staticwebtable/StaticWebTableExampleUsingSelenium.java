@@ -13,10 +13,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class StaticWebTableExampleUsingSelenium {
+import com.raghib.selenium.BaseClass;
+
+public class StaticWebTableExampleUsingSelenium extends BaseClass {
 
 	static WebDriver driver;
-
+	
+	static String browserName = "chrome";
+	static String browserVersion = "116";
+	
 	static By noOfColumns = By.xpath("/html/body/table/tbody/tr/th");
 	static By noOfRows = By.xpath("/html/body/table/tbody/tr/td[1]");
 
@@ -25,18 +30,17 @@ public class StaticWebTableExampleUsingSelenium {
 	static By priceColumn = By.xpath("/html/body/table/tbody/tr/td[4]");
 	
 	public static void main(String args[]) {
-		
-		driver = BrowserSelection.usingChrome();
-
-		driver.get(System.getProperty("user.dir") + "\\Table\\StaticWebTable.html");
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
 		// Modify Wait time as per the Network Ability.
 		// From Selenium 4 onwards implicitWait and WebDriverWait(Explicit wait) for
 		// long is deprecated.
 		// So we can handle WebDriverWait in Selenium like below
-		Duration duration = Duration.ofSeconds(30);
-		driver.manage().timeouts().implicitlyWait(duration);
-		driver.manage().timeouts().pageLoadTimeout(duration);
-
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(100));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().window().maximize();
+		driver.get(System.getProperty("user.dir") + "\\Table\\StaticWebTable.html");
+				
 		// Finding number of Columns
 		List<WebElement> totalColumns = driver.findElements(noOfColumns);
 		int columnCount = 0;
@@ -73,6 +77,6 @@ public class StaticWebTableExampleUsingSelenium {
 		}
 		System.out.println("Total Price: " + sum_price);
 
-		driver.quit();
+		//BaseClass.quitDriver();
 	}
 }

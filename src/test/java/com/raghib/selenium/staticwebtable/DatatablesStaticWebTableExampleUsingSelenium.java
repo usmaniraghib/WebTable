@@ -13,33 +13,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class DatatablesStaticWebTableExampleUsingSelenium {
+import com.raghib.selenium.BaseClass;
+
+public class DatatablesStaticWebTableExampleUsingSelenium extends BaseClass {
 
 	static WebDriver driver;
+	
+	static String browserName = "chrome";
+	static String browserVersion = "116";
+	static String url = "https://datatables.net/examples/basic_init/scroll_y.html";
 
 	static By noOfColumns = By.xpath("//*[@id=\"example\"]//thead/tr/th");
 	static By noOfRows = By.xpath("//*[@id=\"example\"]/tbody/tr");
 
 	static By particularCellValue = By.xpath("//table[@id=\"example\"]/tbody/tr[20]/td[1]");
 
-	static By priceColumn = By.xpath("/html/body/table/tbody/tr/td[4]");
-
 	public static void main(String args[]) {
-
-		driver = BrowserSelection.usingChrome();
-
-		driver.get("https://datatables.net/examples/basic_init/scroll_y.html");
-		
-//		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//		driver.manage().timeouts().pageLoadTimeout(100,TimeUnit.SECONDS);
-		
-		//Modify Wait time as per the Network Ability.
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
+		// Modify Wait time as per the Network Ability.
 		// From Selenium 4 onwards implicitWait and WebDriverWait(Explicit wait) for
 		// long is deprecated.
 		// So we can handle WebDriverWait in Selenium like below
-		Duration duration = Duration.ofSeconds(30);
-		driver.manage().timeouts().implicitlyWait(duration);
-		driver.manage().timeouts().pageLoadTimeout(duration);
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(100));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().window().maximize();
+		driver.get(url);
 
 		// Finding number of Rows
 		int totalRows = driver.findElements(noOfRows).size();
@@ -76,7 +75,7 @@ public class DatatablesStaticWebTableExampleUsingSelenium {
 		}
 
 		// Print Age and Salary of Gavin Joyce name - Dynamic Web Table
-		System.out.println("All The Data From Table!");
+		System.out.println("Print Age and Salary of Gavin Joyce.");
 		for (int rowIndex = 1; rowIndex <= totalRows; rowIndex++) {
 			String nameData = driver.findElement(By.xpath("//table[@id=\"example\"]/tbody/tr[" + rowIndex + "]/td[1]"))
 					.getText();
@@ -88,6 +87,6 @@ public class DatatablesStaticWebTableExampleUsingSelenium {
 				System.out.println(nameData + " | " + ageData + " | "+ salaryData);
 			}			
 		}
-		driver.quit();
+		//BaseClass.quitDriver();
 	}
 }

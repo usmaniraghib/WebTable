@@ -10,15 +10,22 @@ package com.raghib.selenium.staticwebtable;
 import java.awt.AWTException;
 import java.time.Duration;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class StaticWebTableExampleUsingTestng {
+import com.raghib.selenium.BaseClass;
+
+public class StaticWebTableExampleUsingTestng extends BaseClass {
 
 	WebDriver driver;
+	
+	static String browserName = "chrome";
+	static String browserVersion = "116";
 	
 	By noOfColumns = By.xpath("/html/body/table/tbody/tr/th");
 	By noOfRows = By.xpath("/html/body/table/tbody/tr/td[1]");
@@ -29,21 +36,23 @@ public class StaticWebTableExampleUsingTestng {
 
 	@BeforeMethod
 	public void openBrowser() {
-		driver = BrowserSelection.usingChrome();
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
 	}
 
 	@Test
-	public void tableDetails() throws InterruptedException, AWTException {
-		
-		driver.get(System.getProperty("user.dir") + "\\Table\\StaticWebTable.html");
+	public void tableDetails() throws InterruptedException, AWTException {		
 		// Modify Wait time as per the Network Ability.
 		// From Selenium 4 onwards implicitWait and WebDriverWait(Explicit wait) for
 		// long is deprecated.
 		// So we can handle WebDriverWait in Selenium like below
-		Duration duration = Duration.ofSeconds(30);
-		driver.manage().timeouts().implicitlyWait(duration);
-		driver.manage().timeouts().pageLoadTimeout(duration);
-
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(100));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		
+		driver.manage().window().maximize();
+		
+		driver.get(System.getProperty("user.dir") + "\\Table\\StaticWebTable.html");
+		
 		// Finding number of Columns
 		List<WebElement> totalColumns = driver.findElements(noOfColumns);
 		int columnCount = 0;
@@ -78,8 +87,12 @@ public class StaticWebTableExampleUsingTestng {
 		for (WebElement pc : priceColumns) {
 			sum_price = sum_price + Integer.parseInt(pc.getText());
 		}
-		System.out.println("Total Price: " + sum_price);
-
-		driver.quit();
+		System.out.println("Total Price: " + sum_price);	
+	}
+	
+	@AfterMethod
+	public void closeBrowser() {
+		// Chrome Browser Closed.
+		BaseClass.quitDriver();
 	}
 }

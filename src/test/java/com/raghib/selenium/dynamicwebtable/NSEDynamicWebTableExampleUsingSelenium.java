@@ -13,7 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class NSEDynamicWebTableExampleUsingSelenium {
+import com.raghib.selenium.BaseClass;
+
+public class NSEDynamicWebTableExampleUsingSelenium extends BaseClass {
 	
 	public static void main(String args[]) {
 		countRowsandColumns();
@@ -22,6 +24,9 @@ public class NSEDynamicWebTableExampleUsingSelenium {
 	}
 
 	static WebDriver driver;
+	static String browserName = "chrome";
+	static String browserVersion = "116";
+	static String url = "https://www.nseindia.com/market-data/live-equity-market";
 	static int totalRows = 0;
 	static int totalColumns = 0;
 
@@ -31,12 +36,12 @@ public class NSEDynamicWebTableExampleUsingSelenium {
 	static By particularCellValue = By.xpath("//table[@id='equityStockTable']/tbody/tr[3]/td[1]/a");
 
 	public static void getDriverandHitNSEURL() {
-		driver = BrowserSelection.usingChrome();
-
-		driver.get("https://www.nseindia.com/market-data/live-equity-market");
-
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(100));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().window().maximize();
+		driver.get(url);
 	}
 
 	public static void countRowsandColumns() {
@@ -57,7 +62,7 @@ public class NSEDynamicWebTableExampleUsingSelenium {
 		} else {
 			System.out.println("No of columns in this table : " + totalColumns);
 		}
-		driver.quit();
+		BaseClass.quitDriver();
 	}
 	
 	public static void printAllTableData() {
@@ -80,7 +85,7 @@ public class NSEDynamicWebTableExampleUsingSelenium {
 			}
 			System.out.println();
 		}
-		driver.quit();
+		BaseClass.quitDriver();
 	}
 	
 	public static void printDependingTableData() {
@@ -111,6 +116,6 @@ public class NSEDynamicWebTableExampleUsingSelenium {
 				break;
 			}
 		}
-		driver.quit();
+		BaseClass.quitDriver();
 	}
 }

@@ -13,7 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class DynamicWebTableExampleUsingSelenium {
+import com.raghib.selenium.BaseClass;
+
+public class DynamicWebTableExampleUsingSelenium extends BaseClass {
 	
 	public static void main(String args[]) {
 		//countRowsandColumns();
@@ -22,6 +24,9 @@ public class DynamicWebTableExampleUsingSelenium {
 	}
 
 	static WebDriver driver;
+	static String browserName = "chrome";
+	static String browserVersion = "116";
+	static String url = "https://datatables.net/examples/basic_init/scroll_y.html";
 	static int totalRows = 0;
 	static int totalColumns = 0;
 
@@ -31,12 +36,12 @@ public class DynamicWebTableExampleUsingSelenium {
 	static By particularCellValue = By.xpath("//table[@id='example']/tbody/tr[20]/td[1]");
 
 	public static void getDriverandHitURL() {
-		driver = BrowserSelection.usingChrome();
-
-		driver.get("https://datatables.net/examples/basic_init/scroll_y.html");
-
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(100));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().window().maximize();
+		driver.get(url);		
 	}
 
 	public static void countRowsandColumns() {
@@ -57,7 +62,7 @@ public class DynamicWebTableExampleUsingSelenium {
 		} else {
 			System.out.println("No of columns in this table : " + totalColumns);
 		}
-		driver.quit();
+		BaseClass.quitDriver();
 	}
 	
 	public static void printAllTableData() {
@@ -80,7 +85,7 @@ public class DynamicWebTableExampleUsingSelenium {
 			}
 			System.out.println();
 		}
-		driver.quit();
+		BaseClass.quitDriver();
 	}
 	
 	public static void printDependingTableData() {
@@ -107,6 +112,6 @@ public class DynamicWebTableExampleUsingSelenium {
 				System.out.println(nameData + " | " + ageData + " | " + salaryData);
 			}
 		}
-		driver.quit();
+		BaseClass.quitDriver();
 	}
 }
